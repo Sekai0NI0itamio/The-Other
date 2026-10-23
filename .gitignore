@@ -25,5 +25,7 @@ run-data
 repo
 logs
 crash-reports
+artifacts
+src/generated/resources/.cache
 *.log
 .DS_Store

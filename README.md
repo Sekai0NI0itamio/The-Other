@@ -11,21 +11,18 @@ A Minecraft **Forge 1.20.1** horror mod and modpack built around one promise: th
 - **Mod id:** `theother`
 - **Package:** `io.github.sekai0ni0itamio.theother`
 
-## Build
+## Build (GitHub Actions only)
 
-```bash
-./gradlew build
-```
+This project is built **online only**. Do not run a local build.
 
-The reobfuscated mod jar is written to `build/libs/theother-0.1.0.jar`.
+1. Push to `main`.
+2. Open **Actions → Build** in the GitHub repository.
+3. Download the `theother-jar` artifact from the green run.
+4. Install the jar in a clean Forge 1.20.1 instance.
 
-```bash
-./gradlew runClient     # launch a development client
-./gradlew runServer     # launch a development server
-./gradlew runData       # run data generation into src/generated/resources
-```
+The workflow is [`.github/workflows/build.yml`](.github/workflows/build.yml). Pushing a tag such as `v0.1.0` runs [`.github/workflows/release.yml`](.github/workflows/release.yml), which builds online and attaches the jar to a GitHub release.
 
-Requires JDK 17 for the toolchain. Gradle itself can run on JDK 17 or newer. See [Build and test](docs/10-build-and-test.md) for IDE setup, CI, and troubleshooting.
+Requires JDK 17 for the mod toolchain; the workflow runs Gradle on JDK 21. See [Build and test](docs/10-build-and-test.md) for CI logs, artifacts, and troubleshooting.
 
 ## Documentation
 
