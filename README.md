@@ -1,5 +1,7 @@
 # The Other
 
+[![Build](https://github.com/Sekai0NI0itamio/The-Other/actions/workflows/build.yml/badge.svg)](https://github.com/Sekai0NI0itamio/The-Other/actions/workflows/build.yml)
+
 A Minecraft **Forge 1.20.1** horror mod and modpack built around one promise: the world gives you one life in **The Other**.
 
 > Status: playable scaffold. The project builds, runs, and replaces the title screen. The dimension, progression, and one-life systems are documented in [`docs/`](docs/README.md) and are the next implementation phases.
