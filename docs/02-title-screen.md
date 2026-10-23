@@ -239,25 +239,26 @@ The texture lives at `src/main/resources/assets/theother/textures/gui/title/back
 
 ### Adding the vanilla panorama
 
-Vanilla builds a `CubeMap` from `assets/minecraft/textures/gui/title/background/panorama`. A custom screen can construct one:
+Vanilla builds a `CubeMap` from `assets/minecraft/textures/gui/title/background/panorama` and wraps it in a `PanoramaRenderer`. A custom screen can do the same:
 
 ```java
-private CubeMap panorama;
+private PanoramaRenderer panorama;
 
 @Override
 protected void init() {
-    this.panorama = new CubeMap(new ResourceLocation("minecraft", "textures/gui/title/background/panorama"));
+    this.panorama = new PanoramaRenderer(new CubeMap(
+            new ResourceLocation("minecraft", "textures/gui/title/background/panorama")));
     // widgets...
 }
 
 @Override
 public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-    this.panorama.render(this.minecraft, 1.0F, 1.0F, 1.0F);
+    this.panorama.render(partialTick, 1.0F);
     // ...
 }
 ```
 
-`CubeMap` is in `net.minecraft.client.renderer`. Its render parameters are a `Minecraft` instance and three floats; check the mapped signature in your IDE before using it. A static image is easier to control and cheaper; use the cube map only if the rotating panorama is part of the mood.
+`PanoramaRenderer` and `CubeMap` are in `net.minecraft.client.renderer`. The first render argument is the partial tick; the second is the fade alpha. In 1.20.1 `TitleScreen` uses exactly this pair. A static image is easier to control and cheaper; use the panorama only if the slow rotation is part of the mood.
 
 ### Logo rendering
 
@@ -270,7 +271,7 @@ private final LogoRenderer logoRenderer = new LogoRenderer(false);
 this.logoRenderer.renderLogo(graphics, this.width, 1.0F);
 ```
 
-`false` means "not part of a texture atlas" in the vanilla constructor. If the constructor signature differs, use a `blit` of `textures/gui/title/mojangstudios.png` instead. A custom logo is often better for a horror mod than the Mojang logo.
+In 1.20.1 the vanilla `TitleScreen` constructs it with `new LogoRenderer(false)`. If the constructor signature differs, use a `blit` of `textures/gui/title/mojangstudios.png` instead. A custom logo is often better for a horror mod than the Mojang logo.
 
 ### Conditional screens
 
