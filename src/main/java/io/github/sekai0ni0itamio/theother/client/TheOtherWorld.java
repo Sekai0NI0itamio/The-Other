@@ -19,6 +19,7 @@ import net.minecraft.world.level.biome.FixedBiomeSource;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.WorldDimensions;
 import net.minecraft.world.level.levelgen.WorldOptions;
+import net.minecraft.world.level.levelgen.presets.WorldPresets;
 
 public final class TheOtherWorld {
     public static final String FOLDER = "TheOther";
@@ -55,6 +56,6 @@ public final class TheOtherWorld {
     private static WorldDimensions dimensions(RegistryAccess access) {
         Holder<Biome> biome = access.registryOrThrow(Registries.BIOME).getHolderOrThrow(WHEAT_FIELDS);
         ChunkGenerator generator = new WheatChunkGenerator(new FixedBiomeSource(biome));
-        return WorldDimensions.createNormalWorldDimensions(access).replaceOverworldGenerator(access, generator);
+        return WorldPresets.createNormalWorldDimensions(access).replaceOverworldGenerator(access, generator);
     }
 }
