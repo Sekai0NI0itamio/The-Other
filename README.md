@@ -4,7 +4,7 @@
 
 A Minecraft **Forge 1.20.1** horror mod and modpack built around one promise: the world gives you one life in **The Other**.
 
-> Status: first playable slice. The title screen has only Play and Settings; Play creates or loads an infinite wheat field with subtle hills; natural mob spawning is disabled in every world; `/theother export` saves a selected house to `.nbt`. The dimension, progression, and one-life systems are documented in [`docs/`](docs/README.md) and are the next implementation phases.
+> Status: first playable slice. The title screen has only Play and Settings; Play creates or loads an infinite wheat field with subtle hills; natural mob spawning is disabled in every world. House copying is a separate mod, [HouseCopy](https://github.com/Sekai0NI0itamio/HouseCopy). The dimension, progression, and one-life systems are documented in [`docs/`](docs/README.md) and are the next implementation phases.
 
 - **Minecraft:** 1.20.1
 - **Loader:** Forge 47.4.28
@@ -42,9 +42,9 @@ Requires JDK 17 for the mod toolchain; the workflow runs Gradle on JDK 21. See [
 | [Modpack](docs/09-modpack.md) | Forge 1.20.1 performance stack, distribution formats, compatibility |
 | [Build and test](docs/10-build-and-test.md) | Commands, CI, common failures, release checklist |
 | [References](docs/11-references.md) | Primary sources and further reading |
-| [Wheat world and export](docs/12-wheat-world-and-export.md) | The Play flow, the wheat generator, and `/theother export` |
-| [House maps](docs/13-house-maps.md) | The five downloaded house maps and the export workflow |
-| [Ready-to-run test pack](docs/14-ready-modpack.md) | The local mod jars, five map saves, Forge installer, and install steps |
+| [Wheat world](docs/12-wheat-world.md) | The Play flow, the wheat generator, and the global no-spawn rule |
+| [Ready-to-run test pack](docs/14-ready-modpack.md) | The local performance/QoL mod jars, Forge installer, and install steps |
+| [HouseCopy](https://github.com/Sekai0NI0itamio/HouseCopy) | The separate structure-export mod and the five house maps |
 
 ## Repository layout
 

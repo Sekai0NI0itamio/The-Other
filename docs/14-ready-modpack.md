@@ -1,28 +1,18 @@
 # Ready-to-run test pack
 
-A local bundle was assembled for testing the wheat world and exporting a house. The bundle itself is **not committed** (third-party jars and map saves); this guide records what it contains and how to install it.
+A local bundle was assembled for testing The Other with a performance and quality-of-life stack. The bundle itself is **not committed** (third-party jars); this guide records what it contains and how to install it.
 
-## House-copy kit
-
-For the minimal house-copy workflow there is a separate single folder:
-
-```text
-house-copy-kit/
-├── mods/theother-0.1.0.jar
-├── saves/          (the five maps)
-└── forge-1.20.1-47.4.28-installer.jar
-```
-
-Use this when you only want to open a downloaded world and export a house. Use the larger `modpack/` when you want the performance/QoL stack too.
+House copying is a separate mod and has its own single-folder kit: [HouseCopyKit](../../HouseCopyKit) and [HouseCopy](https://github.com/Sekai0NI0itamio/HouseCopy).
 
 ## Bundle contents
 
 | Path | Contents |
 | --- | --- |
 | `modpack/mods/` | 20 jars: The Other CI jar, performance mods, Mouse Tweaks, JEI, and QoL |
-| `modpack/saves/` | The five downloaded house maps, unzipped |
 | `modpack/forge-1.20.1-47.4.28-installer.jar` | Forge installer |
 | `modpack/MODS.md` | Generated list of every jar with its mod id and version |
+
+The bundle does not contain world saves. The five house maps live in `../maps/` and the ready-to-copy kit at `../HouseCopyKit/`.
 
 ## Core jar list
 
@@ -56,34 +46,28 @@ All files were downloaded from Modrinth and verified against their SHA-1 hashes.
 1. Install Java 17.
 2. Create a 1.20.1 Forge **47.4.28** instance, or run `forge-1.20.1-47.4.28-installer.jar`.
 3. Copy `modpack/mods/*.jar` to the instance's `mods/`.
-4. Copy `modpack/saves/*` to the instance's `saves/`.
-5. Launch.
+4. Launch.
 
 ## Use
 
 - **Play** on the title screen creates/loads the wheat world.
 - No natural mobs spawn anywhere. The mod blocks natural, chunk-generation, spawner, structure, patrol, and reinforcement spawns. Spawn eggs, `/summon`, and player-driven breeding still work for testing.
-- **Shift + Play** opens the vanilla world list, so a downloaded map can be opened and its house edited.
-- Export the house with:
-  ```mcfunction
-  /housecopy export house_name x1 y1 z1 x2 y2 z2
-  ```
-- The file is written to `<instance>/.minecraft/theother-exports/house_name.nbt`. The `/theother export` alias also works.
+- For house copying, install the separate HouseCopy mod. It does not change the title screen.
 
 ## Why the bundle is not in git
 
-- The map saves and mod jars are third-party content and are large (about 190 MB of saves plus jars).
+- The mod jars are third-party content.
 - The repository should stay a code/documentation project; the bundle is a local test artifact.
 - `.gitignore` excludes `modpack/` and `maps/`.
 
 ## Caveats
 
-- Two maps (`CASE`, `home`) are older worlds and will be upgraded by 1.20.1 on first load.
 - The wheat world is generated once. Delete `saves/TheOther` to regenerate it after a generator change.
-- The export command excludes entities and caps the selection at 128 blocks per axis.
+- The Other does not contain the house export command. Use HouseCopy.
 
 ## See also
 
-- [Wheat world and export](12-wheat-world-and-export.md)
-- [House maps](13-house-maps.md)
+- [Wheat world](12-wheat-world.md)
 - [Modpack planning](09-modpack.md)
+- [HouseCopy](https://github.com/Sekai0NI0itamio/HouseCopy)
+- [House maps (HouseCopy)](https://github.com/Sekai0NI0itamio/HouseCopy/blob/main/docs/house-maps.md)

@@ -1,26 +1,23 @@
-# Wheat world and structure export
+# Wheat world
 
-This guide covers the first playable slice added after the scaffold:
+This guide covers the first playable slice of The Other:
 
 - A title screen with only **Play** and **Settings**.
-- **Play** creates or loads the `TheOther` world, which is currently an infinite wheat field with subtle hills.
-- A `/theother export` command that copies a selected box into a `.nbt` structure file for later placement.
+- **Play** creates or loads the `TheOther` world, an infinite wheat field with subtle hills.
+- Natural mob spawning is blocked in every world.
 
-The house is not placed yet. The maps and the export tool exist so the house can be chosen, edited in-game, exported, and then added as a structure in a later commit.
+House copying is **not** part of this mod. Use the separate [HouseCopy](https://github.com/Sekai0NI0itamio/HouseCopy) mod for that.
 
 ## Title screen
 
-`TheOtherTitleScreen` now has exactly two controls:
+`TheOtherTitleScreen` has exactly two controls:
 
 | Control | Action |
 | --- | --- |
 | **Play** | `TheOtherWorld.play(this)` |
-| **Shift + Play** | Opens the vanilla `SelectWorldScreen` for editing a downloaded map |
 | **Settings** | Opens the vanilla `OptionsScreen` |
 
-There is no multiplayer button and no quit button. The window close control still exits the game. Shift+Play is an invisible shortcut, not a third button; it exists so the downloaded maps can still be opened while the menu stays two-button minimal.
-
-The screen keeps the dark red-to-black gradient, the title, the subtitle, and a small "One life." tagline. The tagline is cosmetic; the actual one-life rule is not implemented yet.
+There is no multiplayer button, no quit button, and no hidden world-list shortcut. The window close control still exits the game.
 
 ## Play: create or load the wheat world
 
@@ -42,7 +39,7 @@ If the world does not exist, it creates it with a fixed configuration:
 | Seed | `0` |
 | Gamemode | Survival |
 | Difficulty | Peaceful |
-| Cheats | Enabled (required for the export command) |
+| Cheats | Enabled |
 | Structures | Disabled |
 | Overworld generator | `WheatChunkGenerator` |
 | Overworld biome | `theother:wheat_fields` |
@@ -61,7 +58,7 @@ Without the custom biome, the plains biome would decorate the farmland with tree
 
 ### Why structures are disabled
 
-`WorldOptions(0L, false, false)` disables structure generation. Otherwise villages and other overworld structures could appear in the wheat field. `false` for the second argument is `generateStructures`; the third is the bonus chest.
+`WorldOptions(0L, false, false)` disables structure generation. Otherwise villages and other overworld structures could appear in the wheat field.
 
 ## The wheat terrain
 
@@ -109,7 +106,7 @@ The wheat is fully grown and planted on hydrated farmland. Farmland with a crop 
 
 ### No natural mob spawns anywhere
 
-The mod also enforces a global rule, not just the wheat biome:
+The mod enforces a global rule, not just the wheat biome:
 
 - `MobSpawnEvents` listens to `MobSpawnEvent.FinalizeSpawn` and calls `setSpawnCancelled(true)` for every spawn type except `COMMAND`, `SPAWN_EGG`, `BREEDING`, and `MOB_SUMMONED`. Natural, chunk-generation, spawner, structure, patrol, reinforcement, and conversion spawns are blocked.
 - `ServerStartedEvent` sets the `doMobSpawning` game rule to `false` on every loaded level.
@@ -118,89 +115,20 @@ Spawn eggs, `/summon`, and player-driven breeding still work for testing. If you
 
 This is intentional for the first slice. The field is a canvas, not the final level.
 
-## The export command
-
-### Syntax
-
-```mcfunction
-/housecopy export <name> <x1> <y1> <z1> <x2> <y2> <z2>
-/theother export <name> <x1> <y1> <z1> <x2> <y2> <z2>
-```
-
-Example:
-
-```mcfunction
-/housecopy export wheat_house 120 64 -40 145 84 -15
-```
-
-- `<name>` is a word (`a-z`, `0-9`, `_`); it becomes the file name.
-- The two positions are opposite corners. The command normalizes them, so order does not matter.
-- The selection is inclusive.
-- The maximum size is 128 blocks on each axis. The command refuses larger boxes.
-- The command requires permission level 2. In the Play-created world, cheats are enabled, so the host has permission.
-
-### What it writes
-
-The command:
-
-1. Loads every chunk touched by the selection.
-2. Copies the blocks and block entities with `StructureTemplate.fillFromWorld(...)`. Entities are excluded so the player and nearby mobs cannot end up inside the structure.
-3. Saves the structure NBT to:
-
-```text
-<game directory>/theother-exports/<name>.nbt
-```
-
-On a normal client that is:
-
-```text
-.minecraft/theother-exports/<name>.nbt
-```
-
-The file is a standard structure NBT, the same format as `data/<namespace>/structures/<name>.nbt`. It can be placed with a structure block or with `StructureTemplate` code.
-
-### How to use it with a downloaded map
-
-1. Unzip the chosen map into `.minecraft/saves/`.
-2. Launch the 1.20.1 Forge instance with The Other installed.
-3. Open the map, find the house, and modify it.
-4. Press F3 and note the two opposite corners of the house, including the roof and the basement if there is one.
-5. Run `/theother export house_name x1 y1 z1 x2 y2 z2`.
-6. Copy `.minecraft/theother-exports/house_name.nbt` and send it back.
-7. The file is added to `src/main/resources/data/theother/structures/house_name.nbt`.
-8. A later commit places it in the wheat world with `StructureTemplate` or a structure block.
-
-### Export limits and caveats
-
-- The command copies **air** inside the box. That is good for a house: the interior stays empty instead of being filled with terrain on placement.
-- It copies **block entities** (chests, signs, furnaces) with their NBT.
-- It does **not** copy entities (item frames, armor stands, villagers). Add those after placement if needed. This also prevents the player from being captured inside the selection.
-- It does not preserve a structure block's metadata unless the block itself is inside the box. That is fine for a house.
-- The selection must be loaded. The command loads chunks, but a very large box across many chunks can take a moment.
-- The maximum is 128×128×128. A large mansion may need to be exported in pieces or trimmed to the house's footprint.
-- The file is saved on the server's game directory. In singleplayer that is your `.minecraft`; on a dedicated server it is the server's working directory.
-
 ## Current limitations
 
 - The wheat world is generated once per world. Changing the generator later does **not** regenerate an existing `TheOther` world. Delete `.minecraft/saves/TheOther` to regenerate it.
 - The world seed is fixed, but the terrain function is coordinate-based, so the seed has no visible effect on the wheat.
 - The Nether and End are normal dimensions and are reachable only by commands/portals. They are not part of the current slice.
-- The house is not placed automatically. The export workflow is manual by design until the house is chosen.
 - The one-life rule, the basement, the chest, and the forest are still design/docs only.
 
 ## Testing
 
 ```mcfunction
-# After Play creates the world
 /time set day
 /gamemode survival
 /tp @s 0 70 0
-
-# Confirm the generator and biome
 /execute in minecraft:overworld run locate biome theother:wheat_fields
-
-# Export a 10x10x10 test cube
-/housecopy export test_cube 0 64 0 10 74 10
 ```
 
 Expected:
@@ -208,8 +136,7 @@ Expected:
 - The field is wheat in every direction, with gentle height changes.
 - No trees, grass, or mobs.
 - The spawn is in the wheat, with no grass patch or clearing.
-- `theother-exports/test_cube.nbt` exists and is non-empty.
-- Placing the NBT with a structure block reproduces the cube.
+- Hostile mobs do not spawn naturally; spawn eggs and `/summon` still work.
 
 ## Build and CI
 
@@ -219,5 +146,4 @@ The project remains **CI-only**. Push to `main`, let the `Build` workflow compil
 
 - `WorldOpenFlows` 1.20.1: <https://mappings.dev/1.20.1/net/minecraft/client/gui/screens/worldselection/WorldOpenFlows.html>
 - `ChunkGenerator` 1.20.1: <https://mappings.dev/1.20.1/net/minecraft/world/level/chunk/ChunkGenerator.html>
-- `StructureTemplate` 1.20.1: <https://mappings.dev/1.20.1/net/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplate.html>
 - Forge 1.20.1 documentation: <https://docs.minecraftforge.net/en/1.20.1/>

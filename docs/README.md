@@ -18,9 +18,8 @@ This directory is the working handbook for building **The Other** on Minecraft F
 | 09 | [Modpack](09-modpack.md) | You are assembling the Forge 1.20.1 modpack and performance stack |
 | 10 | [Build and test](10-build-and-test.md) | You are running CI, debugging a build, or preparing a release |
 | 11 | [References](11-references.md) | You need the primary documentation |
-| 12 | [Wheat world and export](12-wheat-world-and-export.md) | You are testing Play, the wheat generator, or `/theother export` |
-| 13 | [House maps](13-house-maps.md) | You are choosing, installing, or exporting a house from the five downloaded maps |
-| 14 | [Ready-to-run test pack](14-ready-modpack.md) | You are installing the local jars, maps, and Forge installer |
+| 12 | [Wheat world](12-wheat-world.md) | You are testing Play or the wheat generator |
+| 14 | [Ready-to-run test pack](14-ready-modpack.md) | You are installing the local performance/QoL jars and Forge installer |
 
 ## Ground rules for this project
 
@@ -39,7 +38,7 @@ This directory is the working handbook for building **The Other** on Minecraft F
 | Title screen | Implemented as a dark custom `Screen` with only Play and Settings |
 | Registries | Wheat chunk generator registered; items, blocks, sounds, and entities are next |
 | Wheat world | Play creates or loads `TheOther`, an infinite wheat field with subtle hills |
-| Structure export | `/theother export <name> <x1> <y1> <z1> <x2> <y2> <z2>` saves a `.nbt` to `theother-exports/` |
+| House copy | Separate mod: [HouseCopy](https://github.com/Sekai0NI0itamio/HouseCopy) |
 | Dimensions | Documented, not yet defined |
 | World generation | Documented, not yet defined |
 | Progression | Documented, not yet implemented |
