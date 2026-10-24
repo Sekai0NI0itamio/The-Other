@@ -10,9 +10,9 @@ The mod is one half of the product; the pack is the other. The pack must be stab
 | Loader | Forge 47.4.28 |
 | Java | 17 (bundled by the launcher or installed) |
 | Memory | 4–6 GB recommended; 3 GB is a floor for a light pack |
-| Renderer | Embeddium; Oculus only if shaders are part of the design |
+| Renderer | Embeddium |
 
-Do not ship OptiFine. It conflicts with Embeddium/Oculus and with several modern performance mods.
+Do not ship OptiFine. It conflicts with Embeddium and with several modern performance mods.
 
 ## Core performance stack
 
@@ -21,7 +21,6 @@ Verify each mod has a 1.20.1 Forge build and read its compatibility notes before
 | Mod | Role | Notes |
 | --- | --- | --- |
 | **Embeddium** | Sodium-style chunk rendering | The base renderer; do not stack with OptiFine |
-| **Oculus** | Iris-style shader support | Only if the pack uses shaders; must match the Embeddium version |
 | **FerriteCore** | Reduces blockstate/model memory | Safe, widely used |
 | **ModernFix** | Startup, memory, and mixin fixes | Check the config; some options are aggressive |
 | **Canary** | Lithium-style game-logic optimizations | Choose one Lithium port; do not stack Canary and Radium |
@@ -30,7 +29,7 @@ Verify each mod has a 1.20.1 Forge build and read its compatibility notes before
 | **Entity Culling** | Skips hidden entity rendering | Safe; test with custom entities |
 | **ImmediatelyFast** | Batches immediate-mode rendering | Safe; check GUI mod compatibility |
 | **Clumps** | Merges XP orbs | Safe; changes XP visuals slightly |
-| **AI Improvements** | Cheaper mob AI | Test horror entities; AI changes can alter behaviour |
+| **AI Improvements** | Cheaper mob AI | No natural mobs expected; harmless if kept |
 | **Memory Leak Fix** | Patches known leaks | Check the 1.20.1 build |
 | **Packet Fixer** | Packet size/limits | Useful on large modpacks |
 | **Spark** | Profiler | Keep it optional or dev-only |
@@ -42,42 +41,22 @@ Rules:
 - Read the issue tracker for the exact versions you pin. A "latest" build can be a regression.
 - Keep a `mods.txt` or a manifest comment with the reason for each mod. Future you will not remember.
 
-## Atmosphere and audio
+## No entity, horror, or atmosphere add-ons
 
-| Mod | Role | Caveat |
-| --- | --- | --- |
-| **Sound Physics Remastered** | Reverb, occlusion, muffling | Great for caves and the forest; test performance |
-| **AmbientSounds** or **Dynamic Surroundings** | Biome ambience | Can duplicate the mod's own ambience; configure or omit |
-| **Oculus + shader pack** | Fog, darkness, color grading | Shader licensing; test on low-end GPUs |
-| **Entity Model Features / Entity Texture Features** | Entity variety | Optional; can conflict with custom entity renderers |
-| **Distant Horizons** | Distant terrain LOD | Heavy and version-sensitive; not required for a dark, foggy world |
+The Other does not add hostile entities, and the pack does not add any entity mods. The intended stack is:
 
-For The Other, less is more. A black fog and a good sound bed beat a stack of visual mods.
+- The Other
+- performance mods
+- quality-of-life mods
 
-## Optional horror mods
-
-The plan names the 1.20.1 Forge horror audience (The Boiled One, Twixxel's Stalker). Those mods can be included as "additional mods" if they fit the tone:
-
-- **The Boiled One** — 1.20.1 Forge; a stalker entity. Test it in the peaceful world and the forest; its spawn logic may assume the overworld.
-- **Twixxel's Stalker** — 1.20.1 Forge; another stalker. Test for duplicate AI and sound overlap.
-- **From The Fog** or similar Herobrine mods — optional; they can conflict with a scripted story.
-- **Cave Dweller / Man from the Fog** variants — optional; pick one stalker, not three.
-
-Compatibility questions to answer before shipping:
-
-- Does the mod spawn entities in custom dimensions? If yes, gate it or accept the intrusion.
-- Does it add its own UI overlays or sounds that clash with the darkening?
-- Does it require a specific Forge version?
-- Does it have a config to disable spawns in `theother:*` dimensions?
-- Does it ship assets that cannot be redistributed? Use the platform file ID, not a bundled jar.
+Do not add stalker, Herobrine, or mob mods. Natural mob spawning is disabled by the mod itself, so an entity mod would either fight the rule or be dead weight. Shader and sound-physics mods are also out of scope; the mod's own fog, darkness, and sound design carry the atmosphere.
 
 ## Quality of life
 
 | Mod | Why |
 | --- | --- |
+| **Mouse Tweaks** | Drag-and-drop inventory management |
 | **JEI** | Players need to understand the rose/pot recipe |
-| **Configured** | In-game config editing |
-| **Catalogue** | A better mod list |
 | **Controlling / Searchable** | Find keybinds |
 | **AppleSkin** | Hunger/saturation clarity |
 | **Toast Control** | Remove tutorial toasts that break the mood |
@@ -136,7 +115,7 @@ Notes:
 ```
 
 - `files` uses CurseForge project and file IDs, not jar names. The launcher downloads them.
-- Configs, resource packs, shader packs, and the prebuilt world go in `overrides/`.
+- Configs, resource packs, and the prebuilt world go in `overrides/`.
 - Do not bundle mod jars unless the licence explicitly allows redistribution.
 
 ### Modrinth
@@ -173,7 +152,7 @@ Notes:
 ```
 
 - Generate it with the Modrinth pack format tooling rather than hand-editing hashes.
-- `env` controls client/server installation. A client-only horror mod should be `client: required`, `server: unsupported`.
+- `env` controls client/server installation. A client-only mod should be `client: required`, `server: unsupported`.
 - Include `overrides/` for configs and the world.
 
 ### Prism / MultiMC
@@ -199,10 +178,9 @@ If the world is too large, trim explored chunks or use a smaller world border. A
 
 | Profile | What to test |
 | --- | --- |
-| Clean mod only | Title screen, dimension entry, chest trigger, one-life lock |
-| Full pack | Same, plus performance mods and shaders |
-| Low-end | 4 GB, render distance 8, no shaders |
-| Shader on | Oculus + the chosen shader, The Other fog and darkness |
+| Clean mod only | Title screen, wheat world, chest trigger, one-life lock |
+| Full pack | Same, plus performance and QoL mods |
+| Low-end | 4 GB, render distance 8 |
 | Dedicated server | The mod loads without client classes; dimensions exist; one-life is enforced server-side |
 | Fresh install | The prebuilt world appears; the token is created; the reset works |
 | Reinstall | The token changes; the lock resets as designed |
@@ -233,10 +211,7 @@ If the world is too large, trim explored chunks or use a smaller world border. A
 
 - Forge 1.20.1 downloads: <https://files.minecraftforge.net/net/minecraftforge/forge/index_1.20.1.html>
 - Embeddium: <https://www.curseforge.com/minecraft/mc-mods/embeddium>
-- Oculus: <https://www.curseforge.com/minecraft/mc-mods/oculus>
 - FerriteCore: <https://www.curseforge.com/minecraft/mc-mods/ferritecore>
 - ModernFix: <https://www.curseforge.com/minecraft/mc-mods/modernfix>
 - CurseForge manifest format: <https://support.curseforge.com/en/support/solutions/articles/9000197913-modpack-manifest>
 - Modrinth pack format: <https://docs.modrinth.com/docs/modpacks/format/>
-- The Boiled One: <https://www.curseforge.com/minecraft/search?search=The%20Boiled%20One>
-- Twixxel's Stalker: <https://www.curseforge.com/minecraft/search?search=Twixxel%27s%20Stalker>

@@ -6,8 +6,7 @@ A local bundle was assembled for testing the wheat world and exporting a house. 
 
 | Path | Contents |
 | --- | --- |
-| `modpack/mods/` | The Other CI jar, performance mods, JEI, and QoL |
-| `modpack/mods-optional/` | Oculus and Sound Physics Remastered |
+| `modpack/mods/` | 20 jars: The Other CI jar, performance mods, Mouse Tweaks, JEI, and QoL |
 | `modpack/saves/` | The five downloaded house maps, unzipped |
 | `modpack/forge-1.20.1-47.4.28-installer.jar` | Forge installer |
 | `modpack/MODS.md` | Generated list of every jar with its mod id and version |
@@ -35,13 +34,7 @@ A local bundle was assembled for testing the wheat world and exporting a house. 
 | Toast Control | `8.0.3` | `ToastControl-1.20.1-8.0.3.jar` |
 | Placebo (dependency) | `8.6.3` | `Placebo-1.20.1-8.6.3.jar` |
 | AppleSkin | `2.5.1+mc1.20.1` | `appleskin-forge-mc1.20.1-2.5.1.jar` |
-
-Optional:
-
-| Mod | Version | File |
-| --- | --- | --- |
-| Oculus | `1.8.0` | `oculus-mc1.20.1-1.8.0.jar` |
-| Sound Physics Remastered | `1.20.1-1.5.1` | `sound-physics-remastered-forge-1.20.1-1.5.1.jar` |
+| Mouse Tweaks | `1.20.1-2.25.1` | `MouseTweaks-forge-mc1.20.1-2.25.1.jar` |
 
 All files were downloaded from Modrinth and verified against their SHA-1 hashes. The Other jar is the GitHub Actions artifact.
 
@@ -51,12 +44,12 @@ All files were downloaded from Modrinth and verified against their SHA-1 hashes.
 2. Create a 1.20.1 Forge **47.4.28** instance, or run `forge-1.20.1-47.4.28-installer.jar`.
 3. Copy `modpack/mods/*.jar` to the instance's `mods/`.
 4. Copy `modpack/saves/*` to the instance's `saves/`.
-5. Optional: copy `modpack/mods-optional/*.jar` to `mods/`. Do not copy Embeddium from optional; it is already in core.
-6. Launch.
+5. Launch.
 
 ## Use
 
 - **Play** on the title screen creates/loads the wheat world.
+- No natural mobs spawn anywhere. The mod blocks natural, chunk-generation, spawner, structure, patrol, and reinforcement spawns. Spawn eggs, `/summon`, and player-driven breeding still work for testing.
 - **Shift + Play** opens the vanilla world list, so a downloaded map can be opened and its house edited.
 - Export the house with:
   ```mcfunction
@@ -75,7 +68,6 @@ All files were downloaded from Modrinth and verified against their SHA-1 hashes.
 - Two maps (`CASE`, `home`) are older worlds and will be upgraded by 1.20.1 on first load.
 - The wheat world is generated once. Delete `saves/TheOther` to regenerate it after a generator change.
 - The export command excludes entities and caps the selection at 128 blocks per axis.
-- The optional Sound Physics Remastered build is an alpha; remove it if it causes instability.
 
 ## See also
 

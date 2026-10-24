@@ -110,6 +110,15 @@ The wheat is fully grown and planted on hydrated farmland. Farmland with a crop 
 - No structures.
 - No mobs (peaceful difficulty plus empty spawners).
 
+### No natural mob spawns anywhere
+
+The mod also enforces a global rule, not just the wheat biome:
+
+- `MobSpawnEvents` listens to `MobSpawnEvent.FinalizeSpawn` and calls `setSpawnCancelled(true)` for every spawn type except `COMMAND`, `SPAWN_EGG`, `BREEDING`, and `MOB_SUMMONED`. Natural, chunk-generation, spawner, structure, patrol, reinforcement, and conversion spawns are blocked.
+- `ServerStartedEvent` sets the `doMobSpawning` game rule to `false` on every loaded level.
+
+Spawn eggs, `/summon`, and player-driven breeding still work for testing. If you want absolutely nothing, remove those exceptions from `MobSpawnEvents`.
+
 This is intentional for the first slice. The field is a canvas, not the final level.
 
 ## The export command
