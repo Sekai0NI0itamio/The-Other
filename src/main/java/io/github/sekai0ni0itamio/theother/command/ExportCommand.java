@@ -72,7 +72,7 @@ public final class ExportCommand {
         String name = StringArgumentType.getString(context, "name");
         StructureTemplate template = new StructureTemplate();
         template.setAuthor(context.getSource().getTextName());
-        template.fillFromWorld(level, new BlockPos(minX, minY, minZ), new Vec3i(sizeX, sizeY, sizeZ), true, null);
+        template.fillFromWorld(level, new BlockPos(minX, minY, minZ), new Vec3i(sizeX, sizeY, sizeZ), false, null);
         CompoundTag tag = template.save(new CompoundTag());
 
         Path directory = FMLPaths.GAMEDIR.get().resolve("theother-exports");

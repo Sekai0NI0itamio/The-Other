@@ -55,6 +55,8 @@ On Windows:
 
 Open the world in the 1.20.1 Forge instance with The Other installed. Older worlds will show a version warning; let Minecraft upgrade them. If the upgrade looks wrong, delete the upgraded world and unzip the archive again.
 
+The export command requires permission level 2. If the downloaded map has cheats disabled, enable cheats (Open to LAN → Allow Cheats) or build/export inside the Play-created `TheOther` world instead.
+
 ## Workflow: from map to structure
 
 1. Choose one house.
@@ -75,7 +77,7 @@ Open the world in the 1.20.1 Forge instance with The Other installed. Older worl
 
 - The export command is capped at 128 blocks per axis. Check the house size before selecting corners.
 - A house with a deep basement may need two exports: one for the house, one for the basement room.
-- The selection includes air, block entities, and entities. Chests and signs keep their NBT; item frames and armor stands are included if they are inside the box.
+- The selection includes air and block entities. Chests and signs keep their NBT. Entities such as item frames and armor stands are excluded; add them after placement.
 - Do not include a large slice of surrounding terrain. The wheat world already provides the ground; the house should sit on it.
 - If the house has a custom resource pack, note it. The structure itself only stores block states; a missing mod block would become air or a missing block on placement.
 

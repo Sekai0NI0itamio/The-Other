@@ -136,7 +136,7 @@ Example:
 The command:
 
 1. Loads every chunk touched by the selection.
-2. Copies the blocks, block entities, and entities with `StructureTemplate.fillFromWorld(...)`.
+2. Copies the blocks and block entities with `StructureTemplate.fillFromWorld(...)`. Entities are excluded so the player and nearby mobs cannot end up inside the structure.
 3. Saves the structure NBT to:
 
 ```text
@@ -165,8 +165,8 @@ The file is a standard structure NBT, the same format as `data/<namespace>/struc
 ### Export limits and caveats
 
 - The command copies **air** inside the box. That is good for a house: the interior stays empty instead of being filled with terrain on placement.
-- It copies **entities** (item frames, armor stands) and **block entities** (chests, signs, furnaces) with their NBT.
-- It does not copy entities outside the box. A dropped item or a villager just outside the selection is lost.
+- It copies **block entities** (chests, signs, furnaces) with their NBT.
+- It does **not** copy entities (item frames, armor stands, villagers). Add those after placement if needed. This also prevents the player from being captured inside the selection.
 - It does not preserve a structure block's metadata unless the block itself is inside the box. That is fine for a house.
 - The selection must be loaded. The command loads chunks, but a very large box across many chunks can take a moment.
 - The maximum is 128×128×128. A large mansion may need to be exported in pieces or trimmed to the house's footprint.
