@@ -44,8 +44,8 @@ public final class ExportCommand {
 
     private static int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerLevel level = context.getSource().getLevel();
-        BlockPos from = BlockPosArgument.getLoadedBlockPos(context, "from");
-        BlockPos to = BlockPosArgument.getLoadedBlockPos(context, "to");
+        BlockPos from = BlockPosArgument.getBlockPos(context, "from");
+        BlockPos to = BlockPosArgument.getBlockPos(context, "to");
 
         int minX = Math.min(from.getX(), to.getX());
         int minY = Math.min(from.getY(), to.getY());
