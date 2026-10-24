@@ -36,7 +36,6 @@ public final class WheatChunkGenerator extends ChunkGenerator {
     private static final int MIN_Y = -64;
     private static final int HEIGHT = 384;
     private static final int SEA_LEVEL = 64;
-    private static final int SPAWN_CLEARING_RADIUS = 4;
 
     public WheatChunkGenerator(BiomeSource biomeSource) {
         super(biomeSource);
@@ -56,8 +55,6 @@ public final class WheatChunkGenerator extends ChunkGenerator {
         BlockState bedrock = Blocks.BEDROCK.defaultBlockState();
         BlockState stone = Blocks.STONE.defaultBlockState();
         BlockState dirt = Blocks.DIRT.defaultBlockState();
-        BlockState grass = Blocks.GRASS_BLOCK.defaultBlockState();
-        BlockState air = Blocks.AIR.defaultBlockState();
         BlockState farmland = Blocks.FARMLAND.defaultBlockState().setValue(FarmBlock.MOISTURE, 7);
         BlockState wheat = Blocks.WHEAT.defaultBlockState().setValue(CropBlock.AGE, 7);
 
@@ -81,11 +78,8 @@ public final class WheatChunkGenerator extends ChunkGenerator {
                     chunk.setBlockState(cursor.set(worldX, y, worldZ), state, false);
                 }
 
-                boolean clearing = Math.abs(worldX) <= SPAWN_CLEARING_RADIUS
-                        && Math.abs(worldZ) <= SPAWN_CLEARING_RADIUS;
-
-                chunk.setBlockState(cursor.set(worldX, surface, worldZ), clearing ? grass : farmland, false);
-                chunk.setBlockState(cursor.set(worldX, surface + 1, worldZ), clearing ? air : wheat, false);
+                chunk.setBlockState(cursor.set(worldX, surface, worldZ), farmland, false);
+                chunk.setBlockState(cursor.set(worldX, surface + 1, worldZ), wheat, false);
             }
         }
 
@@ -134,7 +128,7 @@ public final class WheatChunkGenerator extends ChunkGenerator {
 
     @Override
     public int getSpawnHeight(LevelHeightAccessor level) {
-        return surfaceY(0, 0) + 1;
+        return surfaceY(0, 0) + 2;
     }
 
     @Override

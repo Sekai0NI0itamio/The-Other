@@ -1,6 +1,7 @@
 package io.github.sekai0ni0itamio.theother.command;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import io.github.sekai0ni0itamio.theother.TheOther;
@@ -32,14 +33,17 @@ public final class ExportCommand {
 
     @SubscribeEvent
     public static void register(RegisterCommandsEvent event) {
-        event.getDispatcher().register(
-                Commands.literal("theother")
-                        .then(Commands.literal("export")
-                                .requires(source -> source.hasPermission(2))
-                                .then(Commands.argument("name", StringArgumentType.word())
-                                        .then(Commands.argument("from", BlockPosArgument.blockPos())
-                                                .then(Commands.argument("to", BlockPosArgument.blockPos())
-                                                        .executes(ExportCommand::run))))));
+        event.getDispatcher().register(Commands.literal("theother").then(exportCommand()));
+        event.getDispatcher().register(Commands.literal("housecopy").then(exportCommand()));
+    }
+
+    private static LiteralArgumentBuilder<CommandSourceStack> exportCommand() {
+        return Commands.literal("export")
+                .requires(source -> source.hasPermission(2))
+                .then(Commands.argument("name", StringArgumentType.word())
+                        .then(Commands.argument("from", BlockPosArgument.blockPos())
+                                .then(Commands.argument("to", BlockPosArgument.blockPos())
+                                        .executes(ExportCommand::run))));
     }
 
     private static int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
