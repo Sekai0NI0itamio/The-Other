@@ -4,6 +4,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.OptionsScreen;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.network.chat.Component;
 
 public final class TheOtherTitleScreen extends Screen {
@@ -24,7 +25,13 @@ public final class TheOtherTitleScreen extends Screen {
 
         this.addRenderableWidget(Button.builder(
                         Component.translatable("screen.theother.play"),
-                        button -> TheOtherWorld.play(this))
+                        button -> {
+                            if (Screen.hasShiftDown()) {
+                                this.minecraft.setScreen(new SelectWorldScreen(this));
+                            } else {
+                                TheOtherWorld.play(this);
+                            }
+                        })
                 .bounds(left, playTop, 200, 24)
                 .build());
 
