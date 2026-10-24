@@ -91,16 +91,13 @@ From the bottom of the world to the surface:
 | `surface` | Farmland (`moisture=7`) |
 | `surface + 1` | Wheat (`age=7`) |
 
-A 9×9 area around `(0, 0)` is cleared for spawn:
-
-- `surface` is grass instead of farmland.
-- `surface + 1` is air instead of wheat.
+The entire field is farmland with wheat, including the spawn area. There is no grass patch and no clearing.
 
 The wheat is fully grown and planted on hydrated farmland. Farmland with a crop does not revert to dirt, so no water channels are needed. The player can harvest it, replant it, or add water later.
 
 ### Spawn
 
-`getSpawnHeight(0, 0)` returns `surfaceY(0, 0) + 1`. The player stands on the grass clearing and looks out over the wheat. `getBaseHeight` returns the first air block above the surface, so heightmaps and structure placement agree with the terrain.
+`getSpawnHeight(0, 0)` returns `surfaceY(0, 0) + 2`, so the player starts above the wheat and settles onto the farmland. `getBaseHeight` returns the first air block above the surface, so heightmaps and structure placement agree with the terrain.
 
 ### What is not generated
 
@@ -126,13 +123,14 @@ This is intentional for the first slice. The field is a canvas, not the final le
 ### Syntax
 
 ```mcfunction
+/housecopy export <name> <x1> <y1> <z1> <x2> <y2> <z2>
 /theother export <name> <x1> <y1> <z1> <x2> <y2> <z2>
 ```
 
 Example:
 
 ```mcfunction
-/theother export wheat_house 120 64 -40 145 84 -15
+/housecopy export wheat_house 120 64 -40 145 84 -15
 ```
 
 - `<name>` is a word (`a-z`, `0-9`, `_`); it becomes the file name.
@@ -202,14 +200,14 @@ The file is a standard structure NBT, the same format as `data/<namespace>/struc
 /execute in minecraft:overworld run locate biome theother:wheat_fields
 
 # Export a 10x10x10 test cube
-/theother export test_cube 0 64 0 10 74 10
+/housecopy export test_cube 0 64 0 10 74 10
 ```
 
 Expected:
 
 - The field is wheat in every direction, with gentle height changes.
 - No trees, grass, or mobs.
-- The spawn clearing is a small grass patch.
+- The spawn is in the wheat, with no grass patch or clearing.
 - `theother-exports/test_cube.nbt` exists and is non-empty.
 - Placing the NBT with a structure block reproduces the cube.
 

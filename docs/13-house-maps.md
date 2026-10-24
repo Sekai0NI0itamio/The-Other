@@ -55,7 +55,11 @@ On Windows:
 
 Open the world in the 1.20.1 Forge instance with The Other installed. From the custom title screen, hold **Shift** and click **Play** to reach the vanilla world list. Older worlds will show a version warning; let Minecraft upgrade them. If the upgrade looks wrong, delete the upgraded world and unzip the archive again.
 
-The export command requires permission level 2. If the downloaded map has cheats disabled, enable cheats (Open to LAN → Allow Cheats) or build/export inside the Play-created `TheOther` world instead.
+The `/housecopy export` command (or `/theother export`) requires permission level 2. If the downloaded map has cheats disabled, enable cheats (Open to LAN → Allow Cheats) or build/export inside the Play-created `TheOther` world instead.
+
+## Single-folder kit
+
+A minimal local kit is available at `house-copy-kit/`: only The Other jar plus the five world saves. It is separate from the larger performance/QoL pack in `modpack/`.
 
 ## Workflow: from map to structure
 
@@ -66,7 +70,7 @@ The export command requires permission level 2. If the downloaded map has cheats
 5. Run:
 
 ```mcfunction
-/theother export house_name x1 y1 z1 x2 y2 z2
+/housecopy export house_name x1 y1 z1 x2 y2 z2
 ```
 
 6. The command writes `.minecraft/theother-exports/house_name.nbt`.

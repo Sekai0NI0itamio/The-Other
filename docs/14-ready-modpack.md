@@ -2,6 +2,19 @@
 
 A local bundle was assembled for testing the wheat world and exporting a house. The bundle itself is **not committed** (third-party jars and map saves); this guide records what it contains and how to install it.
 
+## House-copy kit
+
+For the minimal house-copy workflow there is a separate single folder:
+
+```text
+house-copy-kit/
+├── mods/theother-0.1.0.jar
+├── saves/          (the five maps)
+└── forge-1.20.1-47.4.28-installer.jar
+```
+
+Use this when you only want to open a downloaded world and export a house. Use the larger `modpack/` when you want the performance/QoL stack too.
+
 ## Bundle contents
 
 | Path | Contents |
@@ -53,9 +66,9 @@ All files were downloaded from Modrinth and verified against their SHA-1 hashes.
 - **Shift + Play** opens the vanilla world list, so a downloaded map can be opened and its house edited.
 - Export the house with:
   ```mcfunction
-  /theother export house_name x1 y1 z1 x2 y2 z2
+  /housecopy export house_name x1 y1 z1 x2 y2 z2
   ```
-- The file is written to `<instance>/.minecraft/theother-exports/house_name.nbt`.
+- The file is written to `<instance>/.minecraft/theother-exports/house_name.nbt`. The `/theother export` alias also works.
 
 ## Why the bundle is not in git
 
