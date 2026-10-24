@@ -1,4 +1,10 @@
 {
   "screen.theother.title": "The Other",
-  "screen.theother.subtitle": "Do not open, or else"
+  "screen.theother.subtitle": "Do not open, or else",
+  "screen.theother.tagline": "One life.",
+  "screen.theother.play": "Play",
+  "screen.theother.settings": "Settings",
+  "theother.command.export.success": "Saved %s (%sx%sx%s) to theother-exports/%s.nbt",
+  "theother.command.export.too_large": "Selection too large. Maximum is %s blocks per axis.",
+  "theother.command.export.failed": "Export failed: %s"
 }
