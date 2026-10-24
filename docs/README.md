@@ -20,6 +20,7 @@ This directory is the working handbook for building **The Other** on Minecraft F
 | 11 | [References](11-references.md) | You need the primary documentation |
 | 12 | [Wheat world and export](12-wheat-world-and-export.md) | You are testing Play, the wheat generator, or `/theother export` |
 | 13 | [House maps](13-house-maps.md) | You are choosing, installing, or exporting a house from the five downloaded maps |
+| 14 | [Ready-to-run test pack](14-ready-modpack.md) | You are installing the local jars, maps, and Forge installer |
 
 ## Ground rules for this project
 

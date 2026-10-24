@@ -53,7 +53,7 @@ On Windows:
 %APPDATA%\.minecraft\saves
 ```
 
-Open the world in the 1.20.1 Forge instance with The Other installed. Older worlds will show a version warning; let Minecraft upgrade them. If the upgrade looks wrong, delete the upgraded world and unzip the archive again.
+Open the world in the 1.20.1 Forge instance with The Other installed. From the custom title screen, hold **Shift** and click **Play** to reach the vanilla world list. Older worlds will show a version warning; let Minecraft upgrade them. If the upgrade looks wrong, delete the upgraded world and unzip the archive again.
 
 The export command requires permission level 2. If the downloaded map has cheats disabled, enable cheats (Open to LAN → Allow Cheats) or build/export inside the Play-created `TheOther` world instead.
 

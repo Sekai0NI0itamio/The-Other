@@ -15,9 +15,10 @@ The house is not placed yet. The maps and the export tool exist so the house can
 | Control | Action |
 | --- | --- |
 | **Play** | `TheOtherWorld.play(this)` |
+| **Shift + Play** | Opens the vanilla `SelectWorldScreen` for editing a downloaded map |
 | **Settings** | Opens the vanilla `OptionsScreen` |
 
-There is no multiplayer button and no quit button. The window close control still exits the game.
+There is no multiplayer button and no quit button. The window close control still exits the game. Shift+Play is an invisible shortcut, not a third button; it exists so the downloaded maps can still be opened while the menu stays two-button minimal.
 
 The screen keeps the dark red-to-black gradient, the title, the subtitle, and a small "One life." tagline. The tagline is cosmetic; the actual one-life rule is not implemented yet.
 

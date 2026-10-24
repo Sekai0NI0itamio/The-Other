@@ -44,6 +44,7 @@ Requires JDK 17 for the mod toolchain; the workflow runs Gradle on JDK 21. See [
 | [References](docs/11-references.md) | Primary sources and further reading |
 | [Wheat world and export](docs/12-wheat-world-and-export.md) | The Play flow, the wheat generator, and `/theother export` |
 | [House maps](docs/13-house-maps.md) | The five downloaded house maps and the export workflow |
+| [Ready-to-run test pack](docs/14-ready-modpack.md) | The local mod jars, five map saves, Forge installer, and install steps |
 
 ## Repository layout
 

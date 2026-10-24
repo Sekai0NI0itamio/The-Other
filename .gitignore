@@ -31,3 +31,4 @@ src/generated/resources/.cache
 .DS_Store
 maps/
 theother-exports/
+modpack/
