@@ -4,7 +4,7 @@
 
 A Minecraft **Forge 1.20.1** horror mod and modpack built around one promise: the world gives you one life in **The Other**.
 
-> Status: first playable slice. The title screen has only Play and Settings; Play creates or loads an infinite wheat field with subtle hills; `/theother export` saves a selected house to `.nbt`. The dimension, progression, and one-life systems are documented in [`docs/`](docs/README.md) and are the next implementation phases.
+> Status: first playable slice. The title screen has only Play and Settings; Play creates or loads an infinite wheat field with subtle hills; natural mob spawning is disabled in every world; `/theother export` saves a selected house to `.nbt`. The dimension, progression, and one-life systems are documented in [`docs/`](docs/README.md) and are the next implementation phases.
 
 - **Minecraft:** 1.20.1
 - **Loader:** Forge 47.4.28
@@ -174,9 +174,11 @@ This is both a **modpack** and a **new mod** from the creator.
 
 ## 5. Modpack Contents
 
+- The Other (described above; no hostile entities)
 - Performance mods
-- Additional mods
-- The horror mod (described above)
+- Quality-of-life mods such as Mouse Tweaks, JEI, and AppleSkin
+
+Natural mob spawning is disabled by the mod. The pack does not add entity, horror, stalker, or shader mods.
 
 version/loader of mod:
 Primary	1.20.1	Forge	The Boiled One has 826K downloads on 1.20.1 Forge alone. Twixxel's Stalker is 1.20.1 Forge. The horror audience is here.
